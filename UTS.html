@@ -11,7 +11,10 @@
 <body>
 
 <div data-role="page" id="win1" >
-    <div data-role="header"></div>
+    <div data-role="header">
+         <h1>Koperasi cap gajah (tekan untuk hilangkan)</h1>
+        <h2>arahakan mouse untuk event 3</h2>
+    </div>
     <div role="main" class="ui-content">
         <form>
   <label for="pinjaman">Pinjaman</label><br>
@@ -23,17 +26,58 @@
 <div>
  <p>Total Pengembalian : <span id="totalpengembalian"></span></p>
  </div>
+ <div>
+ <p>Total Bunga : <span id="Bunga"></span></p>
+ </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <div data-role="navbar">
             <ul>
                 <li><a href="#"  class="ui-btn-active">input</a></li>
+                <li><a href="#win2" > list bunga </a></li>
+                <li><a href="#" > informasi cicilan</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div data-role="page" id="win2" >
+    <div data-role="header"></div>
+    <div role="main" class="ui-content">
+<div>
+ <p>1-6 bulan cicilan : 2% dari pinjaman</p>
+ <p>1-6 bulan cicilan : 1.5% dari pinjaman</p>
+ <p>1-6 bulan cicilan : 1% dari pinjaman</p>
+ </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#win1"  class="ui-btn-active">input</a></li>
                 <li><a href="#" > list bunga </a></li>
                 <li><a href="#" > informasi cicilan</a></li>
             </ul>
         </div>
     </div>
 </div>
+<div data-role="page" id="win3" >
+    <div data-role="header"></div>
+    <div role="main" class="ui-content">
+<div>
+<div>
+<p>cicilan : <span id="cicilan"></span></p>
+ </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#win1"  class="ui-btn-active">input</a></li>
+                <li><a href="#win2" > list bunga </a></li>
+                <li><a href="#" > informasi cicilan</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 </body>
 <script type="text/javascript">
 
@@ -48,28 +92,48 @@
         if (parseInt(waktu)>=1 && parseInt(waktu)<=6) {
 
             var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.02 * parseInt(waktu))
+            var bunga = (parseInt(pinjaman) * 0.02 * parseInt(waktu))
+            var cicilan = (parseInt(pinjaman)/parseInt(waktu)) + parseInt(bunga) 
 
             document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 2% * " +parseInt(waktu)+") = "+parseInt(hasil);
-
+            document.getElementById('Bunga').innerHTML = parseInt(bunga);
+            document.getElementById('cicilan').innerHTML = "harus di bayar sebanyak " + parseInt(waktu) +" kali, sebesar " + parseInt(cicilan); 
         }
 
         else if (parseInt(waktu)>=7 && parseInt(waktu)<=12) {
 
             var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.015 * parseInt(waktu))
-
+            var bunga = (parseInt(pinjaman) * 0.015 * parseInt(waktu))
+            var cicilan = (parseInt(pinjaman)/parseInt(waktu)) + parseInt(bunga) 
             document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 1,5% * " +parseInt(waktu)+") = "+parseInt(hasil);
-
+            document.getElementById('Bunga').innerHTML = parseInt(bunga);
+             document.getElementById('cicilan').innerHTML = "harus di bayar sebanyak " + parseInt(waktu) +" kali, sebesar " + parseInt(cicilan); 
         }
 
         else if (parseInt(waktu)>12) {
 
             var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.01 * parseInt(waktu))
-
+            var bunga = (parseInt(pinjaman) * 0.01 * parseInt(waktu))
+            var cicilan = (parseInt(pinjaman)/parseInt(waktu)) + parseInt(bunga) 
             document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 1% * " +parseInt(waktu)+") = "+parseInt(hasil);
-
+            document.getElementById('Bunga').innerHTML = parseInt(bunga);
+             document.getElementById('cicilan').innerHTML = "harus di bayar sebanyak " + parseInt(waktu) +" kali, sebesar " + parseInt(cicilan); 
         }       
 
     }
+    $(document).on("scrollstart",function(){
+
+      alert("event 1 berhasil");
+
+    });
+    $("h1").on("tap",function(){
+      alert("event 2");
+      $(this).hide();
+
+    });
+    $( document ).on( "vmouseover", "h2", function() {
+  $( this ).append( "<span style='color:#108040;'> Event 3</span>" );
+});
 
 </script>
 
