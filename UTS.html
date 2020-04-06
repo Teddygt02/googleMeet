@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+ <script src="http://code.jquery.com/jquery.min.js"></script>
+ <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+<div data-role="page" id="win1" >
+    <div data-role="header"></div>
+    <div role="main" class="ui-content">
+        <form>
+  <label for="pinjaman">Pinjaman</label><br>
+  <input type="number" id="pinjaman" name="pinjaman"><br>
+  <label for="waktu">Waktu Pinjam:</label><br>
+  <input type="number" id="waktu" name="waktu">
+  <button class="ui-btn" onclick="hasil();">Input</button>
+</form>
+<div>
+ <p>Total Pengembalian : <span id="totalpengembalian"></span></p>
+ </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#"  class="ui-btn-active">input</a></li>
+                <li><a href="#" > list bunga </a></li>
+                <li><a href="#" > informasi cicilan</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    function hasil(){
+
+        var pinjaman = document.getElementById('pinjaman').value;
+
+        var waktu = document.getElementById('waktu').value;
+
+
+
+        if (parseInt(waktu)>=1 && parseInt(waktu)<=6) {
+
+            var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.02 * parseInt(waktu))
+
+            document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 2% * " +parseInt(waktu)+") = "+parseInt(hasil);
+
+        }
+
+        else if (parseInt(waktu)>=7 && parseInt(waktu)<=12) {
+
+            var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.015 * parseInt(waktu))
+
+            document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 1,5% * " +parseInt(waktu)+") = "+parseInt(hasil);
+
+        }
+
+        else if (parseInt(waktu)>12) {
+
+            var hasil = parseInt(pinjaman) + (parseInt(pinjaman) * 0.01 * parseInt(waktu))
+
+            document.getElementById('totalpengembalian').innerHTML =parseInt(pinjaman)+" + "+ "("+parseInt(pinjaman)+" * 1% * " +parseInt(waktu)+") = "+parseInt(hasil);
+
+        }       
+
+    }
+
+</script>
+
+</html>
